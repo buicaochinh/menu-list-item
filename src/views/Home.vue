@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <ListItem name="Menu List">
+      <Item value="Chinh">
+        <Item value="Chinh thứ 2">
+          <Item value="Chinh thứ 4" :is-leaf="true"></Item>
+        </Item>
+        <Item value="Chinh thứ 3" :is-leaf="true"></Item>
+      </Item>
+    </ListItem>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import ListItem from "@/components/ListItem";
+import Item from "@/components/Item";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    ListItem,
+    Item
   }
 };
 </script>
