@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <div class="name">
-      {{ name }} <i class="material-icons" @click="toggle">{{ arrowIcon }}</i>
+    <div class="name" @click="toggle">
+      {{ name }} <i class="material-icons">{{ arrowIcon }}</i>
     </div>
     <transition name="item">
       <ul v-if="!hideChildren" class="list-item">

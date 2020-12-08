@@ -1,9 +1,9 @@
 <template>
   <li>
     <div v-if="!isLeaf" class="wrapper-li">
-      <div class="value">
+      <div class="value" @click="toggleChild">
         {{ value }}
-        <i class="material-icons" @click="toggleChild">{{ arrowIcon }}</i>
+        <i class="material-icons">{{ arrowIcon }}</i>
       </div>
       <transition name="item">
         <ul v-if="!hideChildren" class="list-sub-items">
