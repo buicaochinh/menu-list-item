@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <div class="name" @click="toggle">{{ name }}</div>
+    <div class="name">
+      {{ name }} <i class="material-icons" @click="toggle">{{ arrowIcon }}</i>
+    </div>
     <transition name="item">
       <ul v-if="!hideChildren" class="list-item">
         <slot></slot>
@@ -20,12 +22,18 @@ export default {
   },
   data() {
     return {
-      hideChildren: true
+      hideChildren: true,
+      arrowIcon: "chevron_left"
     };
   },
   methods: {
     toggle() {
       this.hideChildren = !this.hideChildren;
+      if (this.arrowIcon === "chevron_left") {
+        this.arrowIcon = "expand_more";
+      } else {
+        this.arrowIcon = "chevron_left";
+      }
     }
   }
 };
@@ -36,8 +44,14 @@ div.name {
   padding: 0.5rem 0.5rem;
   background-color: black;
   color: #fff;
+  text-transform: uppercase;
 }
 
+i {
+  float: right;
+}
+
+/* Hiệu ứng */
 .item-enter {
   /*transform: translateY(0px);*/
 }

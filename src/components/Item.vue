@@ -1,14 +1,20 @@
 <template>
   <li>
     <div v-if="!isLeaf" class="wrapper-li">
-      <div class="value" @click="toggleChild">{{ value }}</div>
+      <div class="value">
+        {{ value }}
+        <i class="material-icons" @click="toggleChild">{{ arrowIcon }}</i>
+      </div>
       <transition name="item">
         <ul v-if="!hideChildren" class="list-sub-items">
           <slot></slot>
         </ul>
       </transition>
     </div>
-    <div v-if="isLeaf" class="value">{{ value }}</div>
+    <div v-if="isLeaf" class="value" :class="{ small: isSmallest }">
+      <span v-if="isSmallest" class="material-icons">chevron_right</span
+      >{{ value }}
+    </div>
   </li>
 </template>
 
@@ -23,16 +29,26 @@ export default {
     isLeaf: {
       type: Boolean,
       default: false
+    },
+    isSmallest: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      hideChildren: true
+      hideChildren: true,
+      arrowIcon: "add"
     };
   },
   methods: {
     toggleChild() {
       this.hideChildren = !this.hideChildren;
+      if (this.arrowIcon === "add") {
+        this.arrowIcon = "remove";
+      } else {
+        this.arrowIcon = "add";
+      }
     }
   }
 };
@@ -45,8 +61,22 @@ li {
 
 div.value {
   padding: 0.5rem 0.5rem;
+  text-transform: uppercase;
 }
 
+i.material-icons {
+  font-size: 20px;
+  float: right;
+}
+
+span.material-icons {
+  float: left;
+}
+
+.small {
+  font-size: 16px;
+  text-transform: capitalize !important;
+}
 .item-enter {
   /*transform: translateY(0px);*/
 }
